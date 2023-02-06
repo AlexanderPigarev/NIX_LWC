@@ -1,0 +1,19 @@
+@import 'c/styles';
+
+.slds-modal__container {
+    max-width: 70rem !important;
+    width:80% !important;
+}
+
+.modal-content {
+    padding: 20px;
+    height: 300px;
+}
+
+.search-btn-wrapper {
+    padding-top: 24px;
+}
+
+.table-wrapper {
+    margin-top: 50px;
+}

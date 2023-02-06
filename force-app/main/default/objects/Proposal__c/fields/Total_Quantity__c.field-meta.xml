@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Quantity__c</fullName>
+    <description>The total quantity of all equipment.</description>
+    <externalId>false</externalId>
+    <label>Total Quantity</label>
+    <summarizedField>Equipment_Set__c.Quantity__c</summarizedField>
+    <summaryForeignKey>Equipment_Set__c.Proposal__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

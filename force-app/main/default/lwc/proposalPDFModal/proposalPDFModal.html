@@ -1,0 +1,27 @@
+<template>
+	<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" class="slds-modal slds-fade-in-open">
+
+		<div class="slds-modal__container">
+			<header class="slds-modal__header">
+				<h2 class="slds-text-heading_small">Proposal PDF Template</h2>
+				<lightning-icon class="slds-modal__close" icon-name="utility:close" size="small"
+								onclick={closeModalWindow}></lightning-icon>
+			</header>
+			<div class="slds-modal__content modal-content">
+				<template if:true={isContentReadyToRender}>
+					<iframe id="pdfFrame" width="100%" height="100%" src={link}></iframe>
+				</template>
+			</div>
+
+			<footer class="slds-modal__footer">
+				<lightning-button class="slds-m-top_small" variant="brand" onclick={handleSendEmail} label="Send" icon-name="utility:email"
+								  disabled={isSaveBtnDisabled}></lightning-button>
+				<lightning-button class="slds-m-top_small slds-p-around_small" icon-name="utility:download" onclick={handleDownloadPDFDoc} label="Download"
+								  disabled={isSaveBtnDisabled}></lightning-button>
+				<lightning-button class="slds-m-top_small" onclick={closeModalWindow} label="Cancel"></lightning-button>
+			</footer>
+
+		</div>
+	</section>
+
+</template>

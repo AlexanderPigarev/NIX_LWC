@@ -1,0 +1,107 @@
+<template>
+
+	<lightning-card variant="narrow">
+
+		<div class="slds-box header-box">
+			<lightning-layout>
+
+				<lightning-layout-item size=1 padding="around-small">
+					<lightning-icon class="slds-m-left_small" icon-name="standard:proposition"
+									size="medium"></lightning-icon>
+				</lightning-layout-item>
+
+				<lightning-layout-item size=2 padding="around-small" class="header-name-wrapper">
+					<h1 class="header-name">Proposals</h1>
+				</lightning-layout-item>
+
+				<lightning-layout-item alignment-bump="left" padding="around-small">
+					<lightning-button icon-name="utility:add" label="Add" title="Add"
+									  onclick={handleDisplayCreationModalWindow}></lightning-button>
+				</lightning-layout-item>
+			</lightning-layout>
+
+		</div>
+
+		<div class="">
+			<table class="slds-table">
+				<thead class="table-header">
+				<tr>
+					<th>
+						<div>#</div>
+					</th>
+					<th>
+						<div>Name</div>
+					</th>
+					<th>
+						<div>Total Price</div>
+					</th>
+					<th>
+						<div>Opportunity</div>
+					</th>
+					<th>
+						<div>Status</div>
+					</th>
+					<th>
+						<div>Actions</div>
+					</th>
+				</tr>
+				</thead>
+				<tbody>
+
+				<template for:each={filteredProposals} for:item="row">
+					<tr key={row.Id}>
+						<td>
+							<div>
+								{row.idx}
+							</div>
+						</td>
+						<td>
+							<div>
+								<a href={row.link} target=_blank tabindex="-1">{row.Name}</a>
+							</div>
+						</td>
+						<td>
+							<div>
+								<lightning-formatted-number value={row.Total_Price__c} format-style="currency"
+															currency-code="USD" maximum-fraction-digits="0"
+															currency-display-as="symbol"></lightning-formatted-number>
+							</div>
+						</td>
+						<td>
+							<div>
+								{row.Opportunity__r.Name}
+							</div>
+						</td>
+						<td>
+							<div class="status-style">
+								{row.Status__c}
+							</div>
+						</td>
+						<td style="width: 25px">
+							<div class="button-menu-wrapper">
+								<lightning-button-menu alternative-text="Show menu" icon-size="x-small">
+									<lightning-menu-item value={row.Id} label="Delete" onclick={deleteSingleProp}
+														 disabled={row.isActionsDisabled__c}></lightning-menu-item>
+									<lightning-menu-item value={row.Id} label="Send" onclick={openPDFModal}
+														 disabled={row.isActionsDisabled__c}></lightning-menu-item>
+								</lightning-button-menu>
+							</div>
+						</td>
+					</tr>
+				</template>
+				</tbody>
+			</table>
+		</div>
+
+	</lightning-card>
+
+	<template if:true={isCreationPageDisplaying}>
+		<c-proposal-creation-page opp-id={recordId} onclosecreationmodalwindow={handleCloseCreationModalWindow}
+								  onrefreshproposalslist={refreshProposalsList}></c-proposal-creation-page>
+	</template>
+
+	<template if:true={isPDFModalDisplaying}>
+		<c-proposal-p-d-f-modal proposal-id={proposalId} oncloseproposalpdfmodalwindow={handleCloseProposalPDFModalWindow}></c-proposal-p-d-f-modal>
+	</template>
+
+</template>

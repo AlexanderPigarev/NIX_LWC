@@ -1,0 +1,131 @@
+<template>
+	<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" class="slds-modal slds-fade-in-open">
+
+		<div class="slds-modal__container">
+			<header class="slds-modal__header">
+				<h2 class="slds-text-heading_small">New Proposal</h2>
+				<lightning-icon class="slds-modal__close" icon-name="utility:close" size="small"
+								onclick={closeModalWindow}></lightning-icon>
+			</header>
+			<div class="slds-modal__content modal-content">
+
+				<template if:true={isContentReadyToRender}>
+					<lightning-layout>
+
+						<lightning-layout-item size="3">
+							<lightning-input type="text" label="Proposal Name" value={newProposalName}
+											 onchange={handleSetNewProposalName} required="true"></lightning-input>
+						</lightning-layout-item>
+
+						<lightning-layout-item size="4" padding="horizontal-small">
+							<lightning-combobox label="Category"
+												value={categoryId}
+												options={categoriesOptions}
+												onchange={setCategoryId} validity="" required="true">
+							</lightning-combobox>
+						</lightning-layout-item>
+
+						<lightning-layout-item size="5">
+							<lightning-layout>
+								<lightning-layout-item>
+									<lightning-input type="text" label="Product Name" value={productNameKey}
+													 onchange={handleSetProductNameKey}></lightning-input>
+								</lightning-layout-item>
+								<lightning-layout-item class="search-btn-wrapper">
+									<lightning-button class="slds-m-top_small" onclick={handleSearchProducts} label="Search"></lightning-button>
+								</lightning-layout-item>
+							</lightning-layout>
+						</lightning-layout-item>
+
+					</lightning-layout>
+
+
+					<div class="slds-table table-wrapper">
+						<table>
+							<thead class="table-header">
+							<tr>
+								<th>
+									<div>#</div>
+								</th>
+								<th>
+									<div>Category</div>
+								</th>
+								<th>
+									<div>Product Name</div>
+								</th>
+								<th>
+									<div>Amount</div>
+								</th>
+								<th>
+									<div>Quantity</div>
+								</th>
+								<th>
+									<div>Vendor</div>
+								</th>
+								<th>
+									<div>Actions</div>
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+							<template if:true={isProductsTableReadyToRender}>
+								<template for:each={productsList} for:item="row">
+									<tr key={row.Id}>
+										<td>
+											<div>
+												{row.idx}
+											</div>
+										</td>
+										<td>
+											<div>
+												{row.Equipment_Category__r.Name}
+											</div>
+										</td>
+										<td>
+											<div>
+												{row.Name}
+											</div>
+										</td>
+										<td>
+											<div>
+												<lightning-formatted-number value={row.Cost__c} format-style="currency"
+																			currency-code="USD" maximum-fraction-digits="0"
+																			currency-display-as="symbol"></lightning-formatted-number>
+											</div>
+										</td>
+										<td>
+											<div>
+												<lightning-input type="text" name={row.idx} value={quantityTemp} label="" variant="label-hidden"
+																 onchange={handleSetQuantityRow}></lightning-input>
+											</div>
+										</td>
+										<td>
+											<div>
+												{row.Vendor__r.Name}
+											</div>
+										</td>
+										<td>
+											<div>
+												<lightning-input type="checkbox" label="" name={row.idx}
+																 onchange={handleSelectProductRow}></lightning-input>
+											</div>
+										</td>
+
+									</tr>
+								</template>
+							</template>
+							</tbody>
+						</table>
+					</div>
+				</template>
+			</div>
+
+			<footer class="slds-modal__footer">
+				<lightning-button class="slds-m-top_small slds-p-around_small" variant="brand" onclick={handleSave} label="Save"
+								  disabled={isSaveBtnDisabled}></lightning-button>
+				<lightning-button class="slds-m-top_small" onclick={closeModalWindow} label="Cancel"></lightning-button>
+			</footer>
+		</div>
+	</section>
+
+</template>

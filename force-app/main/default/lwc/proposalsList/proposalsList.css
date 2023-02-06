@@ -1,0 +1,18 @@
+@import 'c/styles';
+
+.header-box {
+    padding: 0;
+}
+
+.header-name-wrapper {
+    padding-left: 0;
+}
+
+.header-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.button-menu-wrapper {
+    text-align: center;
+}

@@ -1,0 +1,31 @@
+.table-header-frozen {
+    overflow: auto;
+    height: 100%;
+}
+
+.table-header-frozen thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+
+.bold-font {
+    font-weight: bold;
+}
+
+.table-header {
+    background: #063e49;
+    color: white;
+}
+
+table, th, td {
+    border: 1px solid #c7c7c7;
+    /*border-collapse: inherit;*/
+    padding: 4px 6px;
+}
+
+table {
+    padding: 0;
+}
